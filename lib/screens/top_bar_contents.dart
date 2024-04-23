@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:myecommercewebapp/screens/home_page.dart';
 
 import '../widgets/dropdownButton.dart';
 
@@ -14,16 +15,7 @@ class TopBarContents extends StatefulWidget {
 }
 
 class _TopBarContentsState extends State<TopBarContents> {
-  final List _isHovering = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
+  final List _isHovering = [false, false, false, false];
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +32,24 @@ class _TopBarContentsState extends State<TopBarContents> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                'WELDING WORKS',
-                style: TextStyle(
-                  color: Colors.blueGrey.shade100,
-                  fontSize: 20,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 3,
+              InkWell(
+                onTap: () {
+                  Navigator.pop(context);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) {
+                      return HomePage();
+                    },
+                  ));
+                },
+                child: Text(
+                  'WELDING WORKS',
+                  style: TextStyle(
+                    color: Colors.blueGrey.shade100,
+                    fontSize: 20,
+                    fontFamily: 'Montserrat',
+                    fontWeight: FontWeight.w400,
+                    letterSpacing: 3,
+                  ),
                 ),
               ),
               Expanded(
@@ -241,7 +243,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                                   maintainState: true,
                                   maintainSize: true,
                                   visible: _isHovering[3],
-                                  child: Container( 
+                                  child: Container(
                                     height: 2,
                                     width: 20,
                                     color: Colors.white,

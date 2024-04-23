@@ -4,13 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:myecommercewebapp/screens/products.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
-class FeaturedTiles extends StatelessWidget {
+class FeaturedTiles extends StatefulWidget {
   FeaturedTiles({
     Key? key,
     required this.screenSize,
   }) : super(key: key);
 
   final Size screenSize;
+
+  @override
+  State<FeaturedTiles> createState() => _FeaturedTilesState();
+}
+
+class _FeaturedTilesState extends State<FeaturedTiles> {
+  final List _isHovering = [false, false, false, false, false];
 
   final List<String> assets = [
     'assets/GardenPergola.jpg',
@@ -32,13 +39,13 @@ class FeaturedTiles extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveWidget.isSmallScreen(context)
         ? Padding(
-            padding: EdgeInsets.only(top: screenSize.height / 50),
+            padding: EdgeInsets.only(top: widget.screenSize.height / 50),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: screenSize.width / 15),
+                  SizedBox(width: widget.screenSize.width / 15),
                   ...Iterable<int>.generate(assets.length).map(
                     (int pageIndex) => Row(
                       children: [
@@ -46,8 +53,8 @@ class FeaturedTiles extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(
-                              height: screenSize.width / 2.5,
-                              width: screenSize.width / 1.5,
+                              height: widget.screenSize.width / 2.5,
+                              width: widget.screenSize.width / 1.5,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(5.0),
                                 child: Image.asset(
@@ -58,7 +65,7 @@ class FeaturedTiles extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                top: screenSize.height / 70,
+                                top: widget.screenSize.height / 70,
                               ),
                               child: Text(
                                 title[pageIndex],
@@ -71,7 +78,7 @@ class FeaturedTiles extends StatelessWidget {
                             ),
                           ],
                         ),
-                        SizedBox(width: screenSize.width / 15),
+                        SizedBox(width: widget.screenSize.width / 15),
                       ],
                     ),
                   ),
@@ -81,9 +88,9 @@ class FeaturedTiles extends StatelessWidget {
           )
         : Padding(
             padding: EdgeInsets.only(
-              top: screenSize.height * 0.06,
-              left: screenSize.width / 15,
-              right: screenSize.width / 15,
+              top: widget.screenSize.height * 0.06,
+              left: widget.screenSize.width / 15,
+              right: widget.screenSize.width / 15,
             ),
             child: GridView.builder(
               shrinkWrap: true,
@@ -94,19 +101,30 @@ class FeaturedTiles extends StatelessWidget {
                 return Column(
                   children: [
                     InkWell(
+                      splashColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      onHover: (value) {
+                        setState(() {
+                          value
+                              ? _isHovering[index] = true
+                              : _isHovering[index] = false;
+                        });
+                      },
                       onTap: () {
-                        print('object');
-
                         Navigator.push(context,
                             MaterialPageRoute(builder: ((context) {
                           return ProductsScreen();
                         })));
                       },
                       child: SizedBox(
-                        height: screenSize.width / 6,
-                        width: screenSize.width / 4.8,
+                        height: widget.screenSize.width / 6,
+                        width: _isHovering[index]
+                            ? widget.screenSize.width / 2.4
+                            : widget.screenSize.width / 4.8,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: _isHovering[index]
+                              ? BorderRadius.circular(9.0)
+                              : BorderRadius.circular(5.0),
                           child: Image.asset(
                             assets[index],
                             fit: BoxFit.cover,
@@ -116,7 +134,7 @@ class FeaturedTiles extends StatelessWidget {
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: screenSize.height / 70,
+                        top: widget.screenSize.height / 70,
                       ),
                       child: Text(
                         title[index],

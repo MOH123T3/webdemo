@@ -20,6 +20,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final ScrollController _scrollController = ScrollController();
   double _scrollPosition = 0;
+
   double _opacity = 0;
 
   _scrollListener() {

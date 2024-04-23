@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:myecommercewebapp/screens/product_detail.dart';
 import 'package:myecommercewebapp/screens/top_bar_contents.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
@@ -95,94 +96,66 @@ class _ProductsScreenState extends State<ProductsScreen> {
                                               : screenSize.width / 4.5),
                               itemCount: assets.length,
                               itemBuilder: (context, index) {
-                                return Card(
-                                  elevation: 5,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      left: screenSize.height / 70,
-                                      right: screenSize.height / 70,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                            height: screenSize.width / 7.5,
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(5.0),
-                                              child: Image.asset(
-                                                assets[index],
-                                                fit: BoxFit.cover,
-                                              ),
-                                            )),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text('Name',
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 15,
-                                                  fontFamily: 'Montserrat',
-                                                  fontWeight: FontWeight.w400,
-                                                  letterSpacing: 3,
-                                                )),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Text(
-                                              'Details About The Product',
-                                              style: TextStyle(
-                                                color: Colors.blueGrey[900],
-                                                fontSize: 12,
-                                                fontFamily: 'Montserrat',
-                                                fontWeight: FontWeight.w400,
-                                                letterSpacing: 3,
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  "Price 1999",
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (BuildContext context) {
+                                      return ProductDetail();
+                                    }));
+                                  },
+                                  child: Card(
+                                    elevation: 5,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(
+                                        left: screenSize.height / 70,
+                                        right: screenSize.height / 70,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                              height: screenSize.width / 7.5,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(5.0),
+                                                child: Image.asset(
+                                                  assets[index],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              )),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('Name',
                                                   style: TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 15,
                                                     fontFamily: 'Montserrat',
                                                     fontWeight: FontWeight.w400,
                                                     letterSpacing: 3,
-                                                  ),
-                                                  textAlign: TextAlign.right,
+                                                  )),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                'Details About The Product',
+                                                style: TextStyle(
+                                                  color: Colors.blueGrey[900],
+                                                  fontSize: 12,
+                                                  fontFamily: 'Montserrat',
+                                                  fontWeight: FontWeight.w400,
+                                                  letterSpacing: 3,
                                                 ),
-                                                SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Icon(
-                                                  Icons.favorite,
-                                                  size: 20,
-                                                  color: Colors.red,
-                                                ),
-                                                SizedBox(
-                                                  width: 10,
-                                                ),
-                                                Icon(
-                                                  Icons
-                                                      .add_shopping_cart_rounded,
-                                                  size: 20,
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

@@ -1,21 +1,20 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, library_private_types_in_public_api
 
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
 class DestinationCarousel extends StatefulWidget {
+  const DestinationCarousel({super.key});
+
   @override
   _DestinationCarouselState createState() => _DestinationCarouselState();
 }
 
 class _DestinationCarouselState extends State<DestinationCarousel> {
-  final String imagePath = 'assets/';
-
   final CarouselController _controller = CarouselController();
 
-  List _isHovering = [
+  final List _isHovering = [
     false,
     false,
     false,
@@ -29,7 +28,7 @@ class _DestinationCarouselState extends State<DestinationCarousel> {
     false,
     false
   ];
-  List _isSelected = [
+  final List _isSelected = [
     true,
     false,
     false,
