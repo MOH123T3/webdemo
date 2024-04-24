@@ -54,6 +54,19 @@ class Cw {
     );
   }
 
+  static Text whiteText(data) {
+    return Text(
+      data,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+        fontFamily: 'Montserrat',
+        fontWeight: FontWeight.normal,
+      ),
+      overflow: TextOverflow.clip,
+    );
+  }
+
   static ElevatedButton commonButton(data) {
     return ElevatedButton(
         style: ButtonStyle(

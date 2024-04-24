@@ -9,7 +9,6 @@ import 'package:myecommercewebapp/screens/feacher_tiles.dart';
 import 'package:myecommercewebapp/screens/flotiong_quick_bar.dart';
 import 'package:myecommercewebapp/screens/top_bar_contents.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
-
 import 'destination_carousel.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,20 +17,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final ScrollController _scrollController = ScrollController();
   double _scrollPosition = 0;
 
   double _opacity = 0;
 
-  _scrollListener() {
-    setState(() {
-      _scrollPosition = _scrollController.position.pixels;
-    });
-  }
-
   @override
   void initState() {
-    _scrollController.addListener(_scrollListener);
     super.initState();
   }
 
@@ -65,10 +56,12 @@ class _HomePageState extends State<HomePage> {
             ),
       drawer: ExploreDrawer(),
       body: SingleChildScrollView(
-        controller: _scrollController,
         physics: ClampingScrollPhysics(),
         child: Column(
           children: [
+            SizedBox(
+              height: 70,
+            ),
             Stack(
               children: [
                 SizedBox(
@@ -80,6 +73,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     FloatingQuickAccessBar(screenSize: screenSize),
                     Column(

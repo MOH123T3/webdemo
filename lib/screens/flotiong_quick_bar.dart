@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
+import '../widgets/search_bar.dart';
+
 class FloatingQuickAccessBar extends StatefulWidget {
   const FloatingQuickAccessBar({
     Key? key,
@@ -42,7 +44,14 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
             value ? _isHovering[i] = true : _isHovering[i] = false;
           });
         },
-        onTap: () {},
+        onTap: () {
+          if (i == 0) {
+            showSearch(
+                useRootNavigator: false,
+                context: context,
+                delegate: CustomSearchDelegate());
+          }
+        },
         child: Text(
           items[i],
           style: TextStyle(

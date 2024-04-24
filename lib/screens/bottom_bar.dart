@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:myecommercewebapp/screens/bottom_bar_column.dart';
 import 'package:myecommercewebapp/screens/info_text.dart';
@@ -11,7 +13,7 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(30),
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 30),
       color: Colors.blueGrey[900],
       child: ResponsiveWidget.isSmallScreen(context)
           ? Column(
@@ -87,7 +89,7 @@ class BottomBar extends StatelessWidget {
                     Container(
                       color: Colors.blueGrey,
                       width: 2,
-                      height: 150,
+                      height: 50,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,17 +106,6 @@ class BottomBar extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-                Divider(
-                  color: Colors.blueGrey,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  'Copyright © 2020 | EXPLORE',
-                  style: TextStyle(
-                    color: Colors.blueGrey.shade300,
-                    fontSize: 14,
-                  ),
                 ),
               ],
             ),

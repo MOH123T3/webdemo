@@ -37,8 +37,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   carousel_slider: ^4.2.1
   flutter_launcher_icons: ^0.13.1
-  get:
-  window_style_dropdown_menu: ^1.0.0+3
+  flutter_smart_dialog: ^4.9.6+1
+
+
 
  
 flutter_launcher_icons:

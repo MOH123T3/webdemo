@@ -38,71 +38,66 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
   @override
   Widget build(BuildContext context) {
     return ResponsiveWidget.isSmallScreen(context)
-        ? Padding(
-            padding: EdgeInsets.only(top: widget.screenSize.height / 50),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  SizedBox(width: widget.screenSize.width / 15),
-                  ...Iterable<int>.generate(assets.length).map(
-                    (int pageIndex) => Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              height: widget.screenSize.width / 2.5,
-                              width: widget.screenSize.width / 1.5,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(5.0),
-                                child: Image.asset(
-                                  assets[pageIndex],
-                                  fit: BoxFit.cover,
-                                ),
+        ? SingleChildScrollView(
+            padding: EdgeInsets.zero,
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(width: widget.screenSize.width / 15),
+                ...Iterable<int>.generate(assets.length).map(
+                  (int pageIndex) => Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: widget.screenSize.width / 2.5,
+                            width: widget.screenSize.width / 1.5,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(5.0),
+                              child: Image.asset(
+                                assets[pageIndex],
+                                fit: BoxFit.cover,
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: widget.screenSize.height / 70,
-                              ),
-                              child: Text(
-                                title[pageIndex],
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: 'Montserrat',
-                                  fontWeight: FontWeight.w500,
-                                ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(
+                              top: widget.screenSize.height / 70,
+                            ),
+                            child: Text(
+                              title[pageIndex],
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontFamily: 'Montserrat',
+                                fontWeight: FontWeight.w500,
                               ),
                             ),
-                          ],
-                        ),
-                        SizedBox(width: widget.screenSize.width / 15),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(width: widget.screenSize.width / 15),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )
         : Padding(
             padding: EdgeInsets.only(
-              top: widget.screenSize.height * 0.06,
               left: widget.screenSize.width / 15,
               right: widget.screenSize.width / 15,
             ),
             child: GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3, childAspectRatio: 2 / 1.6),
               shrinkWrap: true,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
               itemCount: assets.length,
               itemBuilder: (context, index) {
                 return Column(
                   children: [
                     InkWell(
-                      splashColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
                       onHover: (value) {
                         setState(() {
                           value
@@ -116,29 +111,48 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
                           return ProductsScreen();
                         })));
                       },
-                      child: SizedBox(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: _isHovering[index]
+                                ? BorderRadius.only(
+                                    topLeft: Radius.circular(9),
+                                    topRight: Radius.circular(9))
+                                : BorderRadius.only(
+                                    topLeft: Radius.circular(5),
+                                    topRight: Radius.circular(5)),
+                            image: DecorationImage(
+                                image: AssetImage(assets[index]),
+                                fit: BoxFit.cover),
+                            boxShadow: [
+                              BoxShadow(
+                                  blurRadius: _isHovering[index] ? 10 : 0,
+                                  blurStyle: BlurStyle.solid),
+                            ]),
                         height: widget.screenSize.width / 6,
                         width: _isHovering[index]
-                            ? widget.screenSize.width / 2.4
-                            : widget.screenSize.width / 4.8,
-                        child: ClipRRect(
-                          borderRadius: _isHovering[index]
-                              ? BorderRadius.circular(9.0)
-                              : BorderRadius.circular(5.0),
-                          child: Image.asset(
-                            assets[index],
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                            ? widget.screenSize.width / 3
+                            : widget.screenSize.width / 4,
                       ),
                     ),
-                    Padding(
+                    Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(9),
+                            bottomRight: Radius.circular(9)),
+                      ),
+                      width: _isHovering[index]
+                          ? widget.screenSize.width / 3
+                          : widget.screenSize.width / 4,
                       padding: EdgeInsets.only(
                         top: widget.screenSize.height / 70,
+                        bottom: widget.screenSize.height / 70,
                       ),
                       child: Text(
                         title[index],
                         style: TextStyle(
+                          color: Colors.white,
                           fontSize: 16,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w500,
