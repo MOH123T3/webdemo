@@ -1,16 +1,19 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, must_be_immutable, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:myecommercewebapp/screens/products.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
 class FeaturedTiles extends StatefulWidget {
-  FeaturedTiles({
-    Key? key,
-    required this.screenSize,
-  }) : super(key: key);
-
   final Size screenSize;
+  double height;  
+  ScrollController controller;
+  FeaturedTiles(
+      {Key? key,
+      required this.screenSize,
+      required this.controller,
+      required this.height})
+      : super(key: key);
 
   @override
   State<FeaturedTiles> createState() => _FeaturedTilesState();
@@ -34,6 +37,14 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
     'Shutter',
     'Sheds',
   ];
+
+  void animateToIndex(int index) {
+    widget.controller.animateTo(
+      index * widget.height,
+      duration: Duration(seconds: 2),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,20 +117,28 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
                         });
                       },
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: ((context) {
-                          return ProductsScreen();
-                        })));
+                        if (index == 0) {
+                          animateToIndex(12);
+                        } else if (index == 1) {
+                          animateToIndex(22);
+                        } else if (index == 2) {
+                          animateToIndex(33);
+                        } else if (index == 3) {
+                          animateToIndex(43);
+                        } else if (index == 4) {
+                          animateToIndex(53);
+                        }
+
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: ((context) {
+                        //   return ProductsScreen();
+                        // })));
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                            borderRadius: _isHovering[index]
-                                ? BorderRadius.only(
-                                    topLeft: Radius.circular(9),
-                                    topRight: Radius.circular(9))
-                                : BorderRadius.only(
-                                    topLeft: Radius.circular(5),
-                                    topRight: Radius.circular(5)),
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5)),
                             image: DecorationImage(
                                 image: AssetImage(assets[index]),
                                 fit: BoxFit.cover),
@@ -160,7 +179,7 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
                       ),
                     ),
                   ],
-                );
+                ).animate().flipH(duration: 600.ms).then(delay: 200.ms);
               },
             ),
           );

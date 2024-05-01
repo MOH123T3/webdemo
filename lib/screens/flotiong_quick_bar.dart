@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
 import '../widgets/search_bar.dart';
@@ -16,7 +17,7 @@ class FloatingQuickAccessBar extends StatefulWidget {
 }
 
 class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
-  List _isHovering = [false, false, false, false];
+  final List _isHovering = [false, false, false, false];
   List<Widget> rowElements = [];
 
   List<String> items = [
@@ -81,72 +82,71 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
     return Center(
       heightFactor: 1,
       child: Padding(
-        padding: EdgeInsets.only(
-          top: widget.screenSize.height * 0.40,
-          left: ResponsiveWidget.isSmallScreen(context)
-              ? widget.screenSize.width / 12
-              : widget.screenSize.width / 5,
-          right: ResponsiveWidget.isSmallScreen(context)
-              ? widget.screenSize.width / 12
-              : widget.screenSize.width / 5,
-        ),
-        child: ResponsiveWidget.isSmallScreen(context)
-            ? Column(
-                children: [
-                  ...Iterable<int>.generate(items.length).map(
-                    (int pageIndex) => Padding(
-                      padding:
-                          EdgeInsets.only(top: widget.screenSize.height / 80),
-                      child: Card(
-                        elevation: 4,
-                        child: Container(
-                          // decoration: BoxDecoration(
-                          //     image: DecorationImage(
-                          //         image: AssetImage('assets/backtwo.jpeg'),
-                          //         fit: BoxFit.cover)),
-                          padding: EdgeInsets.only(
-                              top: widget.screenSize.height / 45,
-                              bottom: widget.screenSize.height / 45,
-                              left: widget.screenSize.width / 20),
-                          child: Row(
-                            children: [
-                              Icon(
-                                icons[pageIndex],
-                                color: Colors.black,
-                              ),
-                              SizedBox(width: widget.screenSize.width / 20),
-                              InkWell(
-                                splashColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                onTap: () {},
-                                child: Text(
-                                  items[pageIndex],
-                                  style: const TextStyle(
-                                      color: Colors.black, fontSize: 16),
+          padding: EdgeInsets.only(
+            top: widget.screenSize.height * 0.40,
+            left: ResponsiveWidget.isSmallScreen(context)
+                ? widget.screenSize.width / 12
+                : widget.screenSize.width / 5,
+            right: ResponsiveWidget.isSmallScreen(context)
+                ? widget.screenSize.width / 12
+                : widget.screenSize.width / 5,
+          ),
+          child: ResponsiveWidget.isSmallScreen(context)
+              ? Column(
+                  children: [
+                    ...Iterable<int>.generate(items.length).map(
+                      (int pageIndex) => Padding(
+                        padding:
+                            EdgeInsets.only(top: widget.screenSize.height / 80),
+                        child: Card(
+                          elevation: 4,
+                          child: Container(
+                            // decoration: BoxDecoration(
+                            //     image: DecorationImage(
+                            //         image: AssetImage('assets/backtwo.jpeg'),
+                            //         fit: BoxFit.cover)),
+                            padding: EdgeInsets.only(
+                                top: widget.screenSize.height / 45,
+                                bottom: widget.screenSize.height / 45,
+                                left: widget.screenSize.width / 20),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  icons[pageIndex],
+                                  color: Colors.black,
                                 ),
-                              ),
-                            ],
+                                SizedBox(width: widget.screenSize.width / 20),
+                                InkWell(
+                                  splashColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  onTap: () {},
+                                  child: Text(
+                                    items[pageIndex],
+                                    style: const TextStyle(
+                                        color: Colors.black, fontSize: 16),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
+                  ],
+                )
+              : Card(
+                  elevation: 5,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      top: widget.screenSize.height / 50,
+                      bottom: widget.screenSize.height / 50,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: generateRowElements(),
+                    ),
                   ),
-                ],
-              )
-            : Card(
-                elevation: 5,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                    top: widget.screenSize.height / 50,
-                    bottom: widget.screenSize.height / 50,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: generateRowElements(),
-                  ),
-                ),
-              ),
-      ),
+                ).animate().scale(delay: 200.ms, duration: 400.ms)),
     );
   }
 }

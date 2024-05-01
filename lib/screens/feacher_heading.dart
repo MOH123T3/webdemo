@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-
+import 'package:flutter_animate/flutter_animate.dart';
 import '../widgets/responsive.dart';
 
 class FeaturedHeading extends StatelessWidget {
@@ -34,7 +34,7 @@ class FeaturedHeading extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 5),
+                SizedBox(height: 15),
                 Text(
                   'Trusted Complete Welding Services',
                   textAlign: TextAlign.end,
@@ -49,11 +49,15 @@ class FeaturedHeading extends StatelessWidget {
                 Text(
                   'Our Services',
                   style: TextStyle(
-                    fontSize: 40,
+                    fontSize: 25,
                     fontFamily: 'Montserrat',
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                )
+                    .animate()
+                    .fadeIn(duration: 600.ms)
+                    .then(delay: 200.ms) // baseline=800ms
+                    .slide(),
                 Expanded(
                   child: Text(
                     'Trusted Complete Welding Services',

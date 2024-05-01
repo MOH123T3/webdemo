@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
 import 'package:myecommercewebapp/screens/home_page.dart';
 
@@ -63,19 +64,33 @@ class _TopBarContentsState extends State<TopBarContents> {
                   },
                 ));
               },
-              child: Text(
-                'WELDING WORKS',
-                style: TextStyle(
-                  color: Colors.blueGrey.shade100,
-                  fontSize: 20,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.w400,
-                  letterSpacing: 3,
-                ),
-              ),
+              child: Animate(
+                  effects: [FadeEffect(duration: 300.ms)],
+                  child: Row(
+                    children: [
+                      Text(
+                        'WELDING WORKS',
+                        style: TextStyle(
+                          color: Colors.blueGrey.shade100,
+                          fontSize: 20,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+                          letterSpacing: 3,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Image.asset(
+                        'assets/welder.png',
+                        color: Colors.blueGrey.shade100,
+                        fit: BoxFit.cover,
+                      )
+                    ],
+                  )),
             ),
             SizedBox(
-              width: screenSize.width / 35,
+              width: screenSize.width / 45,
             ),
             Expanded(
               child: ListView.builder(
