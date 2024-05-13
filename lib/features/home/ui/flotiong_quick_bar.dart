@@ -1,8 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:myecommercewebapp/config/theme.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
-import '../widgets/search_bar.dart';
+import '../../../widgets/search_bar.dart';
 
 class FloatingQuickAccessBar extends StatefulWidget {
   const FloatingQuickAccessBar({
@@ -38,8 +41,6 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
     rowElements.clear();
     for (int i = 0; i < items.length; i++) {
       Widget elementTile = InkWell(
-        splashColor: Colors.transparent,
-        hoverColor: Colors.transparent,
         onHover: (value) {
           setState(() {
             value ? _isHovering[i] = true : _isHovering[i] = false;
@@ -56,7 +57,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
         child: Text(
           items[i],
           style: TextStyle(
-            color: _isHovering[i] ? Colors.blueGrey[900] : Colors.blueGrey,
+            color: _isHovering[i] ? AppColors.green : AppColors.black,
           ),
         ),
       );
@@ -83,7 +84,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
       heightFactor: 1,
       child: Padding(
           padding: EdgeInsets.only(
-            top: widget.screenSize.height * 0.40,
+            top: widget.screenSize.height * 0.32,
             left: ResponsiveWidget.isSmallScreen(context)
                 ? widget.screenSize.width / 12
                 : widget.screenSize.width / 5,
@@ -99,15 +100,12 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
                         padding:
                             EdgeInsets.only(top: widget.screenSize.height / 80),
                         child: Card(
-                          elevation: 4,
+                          shadowColor: AppColors.white,
                           child: Container(
-                            // decoration: BoxDecoration(
-                            //     image: DecorationImage(
-                            //         image: AssetImage('assets/backtwo.jpeg'),
-                            //         fit: BoxFit.cover)),
+                            height: 40,
                             padding: EdgeInsets.only(
-                                top: widget.screenSize.height / 45,
-                                bottom: widget.screenSize.height / 45,
+                                top: widget.screenSize.height / 60,
+                                bottom: widget.screenSize.height / 60,
                                 left: widget.screenSize.width / 20),
                             child: Row(
                               children: [
@@ -123,7 +121,7 @@ class _FloatingQuickAccessBarState extends State<FloatingQuickAccessBar> {
                                   child: Text(
                                     items[pageIndex],
                                     style: const TextStyle(
-                                        color: Colors.black, fontSize: 16),
+                                        color: Colors.black, fontSize: 14),
                                   ),
                                 ),
                               ],

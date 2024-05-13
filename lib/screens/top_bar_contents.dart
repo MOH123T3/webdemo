@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_smart_dialog/flutter_smart_dialog.dart';
-import 'package:myecommercewebapp/screens/home_page.dart';
+import 'package:myecommercewebapp/features/home/ui/home.dart';
 
 class TopBarContents extends StatefulWidget {
   final double opacity;
@@ -67,6 +67,7 @@ class _TopBarContentsState extends State<TopBarContents> {
               child: Animate(
                   effects: [FadeEffect(duration: 300.ms)],
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'WELDING WORKS',
@@ -79,7 +80,7 @@ class _TopBarContentsState extends State<TopBarContents> {
                         ),
                       ),
                       SizedBox(
-                        width: 20,
+                        width: widget.isFrom == false ? 80 : 20,
                       ),
                       Image.asset(
                         'assets/welder.png',
@@ -92,83 +93,86 @@ class _TopBarContentsState extends State<TopBarContents> {
             SizedBox(
               width: screenSize.width / 45,
             ),
-            Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: titleName.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
-                      alignment: Alignment.center,
-                      child: InkWell(
-                        onHover: (value) {
-                          setState(() {
-                            value
-                                ? _isHovering[index] = true
-                                : _isHovering[index] = false;
-                          });
-                        },
-                        onTap: () {
-                          _showAttach(context, screenSize, titleName[index]);
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  titleName[index],
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: _isHovering[index]
-                                        ? Colors.blue
-                                        : Colors.white,
+            widget.isFrom == false
+                ? Center()
+                : Expanded(
+                    child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: titleName.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.symmetric(horizontal: 10),
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onHover: (value) {
+                                setState(() {
+                                  value
+                                      ? _isHovering[index] = true
+                                      : _isHovering[index] = false;
+                                });
+                              },
+                              onTap: () {
+                                _showAttach(
+                                    context, screenSize, titleName[index]);
+                              },
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        titleName[index],
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          color: _isHovering[index]
+                                              ? Colors.blue
+                                              : Colors.white,
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onHover: (value) {
+                                          setState(() {
+                                            value
+                                                ? _isHovering[index] = true
+                                                : _isHovering[index] = false;
+                                          });
+                                          if (_isHovering[index] == true) {
+                                            _showAttach(context, screenSize,
+                                                titleName[index]);
+                                          }
+                                        },
+                                        onTap: () {
+                                          _showAttach(context, screenSize,
+                                              titleName[index]);
+                                        },
+                                        child: Icon(
+                                          Icons.keyboard_arrow_down_rounded,
+                                          size: 20,
+                                          color: _isHovering[index]
+                                              ? Colors.blue
+                                              : Colors.white,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ),
-                                InkWell(
-                                  onHover: (value) {
-                                    setState(() {
-                                      value
-                                          ? _isHovering[index] = true
-                                          : _isHovering[index] = false;
-                                    });
-                                    if (_isHovering[index] == true) {
-                                      _showAttach(context, screenSize,
-                                          titleName[index]);
-                                    }
-                                  },
-                                  onTap: () {
-                                    _showAttach(
-                                        context, screenSize, titleName[index]);
-                                  },
-                                  child: Icon(
-                                    Icons.keyboard_arrow_down_rounded,
-                                    size: 20,
-                                    color: _isHovering[index]
-                                        ? Colors.blue
-                                        : Colors.white,
-                                  ),
-                                )
-                              ],
-                            ),
-                            SizedBox(height: 5),
-                            Visibility(
-                              maintainAnimation: true,
-                              maintainState: true,
-                              maintainSize: true,
-                              visible: _isHovering[index],
-                              child: Container(
-                                height: 2,
-                                width: 20,
-                                color: Colors.white,
+                                  SizedBox(height: 5),
+                                  Visibility(
+                                    maintainAnimation: true,
+                                    maintainState: true,
+                                    maintainSize: true,
+                                    visible: _isHovering[index],
+                                    child: Container(
+                                      height: 2,
+                                      width: 20,
+                                      color: Colors.white,
+                                    ),
+                                  )
+                                ],
                               ),
-                            )
-                          ],
-                        ),
-                      ),
-                    );
-                  }),
-            ),
+                            ),
+                          );
+                        }),
+                  ),
           ],
         ),
       ),

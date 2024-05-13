@@ -2,7 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import '../widgets/responsive.dart';
+import 'package:myecommercewebapp/widgets/common_widget.dart';
+import '../../../widgets/responsive.dart';
 
 class FeaturedHeading extends StatelessWidget {
   const FeaturedHeading({
@@ -26,18 +27,12 @@ class FeaturedHeading extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(),
-                Text(
+                Cw.whiteHeadingText(
                   'Our Services',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.bold,
-                  ),
                 ),
                 SizedBox(height: 15),
-                Text(
+                Cw.whiteText(
                   'Trusted Complete Welding Services',
-                  textAlign: TextAlign.end,
                 ),
                 SizedBox(height: 10),
               ],

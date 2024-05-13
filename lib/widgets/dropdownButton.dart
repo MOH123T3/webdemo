@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +12,7 @@ class DropDown extends StatefulWidget {
 
 class DropDownPageState extends State<DropDown> {
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         hint: Text(

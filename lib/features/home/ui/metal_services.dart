@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
-import '../widgets/common_widget.dart';
+import '../../../widgets/common_widget.dart';
 
 class MetalServices extends StatefulWidget {
   const MetalServices({super.key});
@@ -37,18 +37,21 @@ class _MetalServicesState extends State<MetalServices> {
         itemCount: assets.length,
         physics: const NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
-          return Stack(
-            alignment: Alignment.center,
-            children: [
-              ImageFiltered(
-                  imageFilter: ImageFilter.blur(
-                      sigmaX: 2, sigmaY: 2, tileMode: TileMode.repeated),
-                  child: Image.asset(
-                    assets[index],
-                    fit: BoxFit.cover,
-                  )),
-              Positioned(left: 10, top: 39, child: Cw.headingText(title[index]))
-            ],
+          return Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ImageFiltered(
+                    imageFilter: ImageFilter.blur(
+                        sigmaX: 2, sigmaY: 2, tileMode: TileMode.repeated),
+                    child: Image.asset(
+                      assets[index],
+                      fit: BoxFit.cover,
+                    )),
+                Positioned(
+                    left: 10, top: 39, child: Cw.headingText(title[index]))
+              ],
+            ),
           );
         },
       ),

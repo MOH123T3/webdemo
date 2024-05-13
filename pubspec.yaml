@@ -39,6 +39,8 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   flutter_smart_dialog: ^4.9.6+1
   flutter_animate: ^4.5.0
+  bloc: 
+  flutter_bloc:
 
 
 

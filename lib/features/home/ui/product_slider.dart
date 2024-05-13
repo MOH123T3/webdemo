@@ -2,81 +2,48 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:myecommercewebapp/features/home/models/home_product_model.dart';
 import 'package:myecommercewebapp/widgets/responsive.dart';
 
-class WeldingSlider extends StatefulWidget {
-  const WeldingSlider({super.key});
+class ProductSlider extends StatefulWidget {
+  final List<ProductDataModel> productDataList;
+
+  const ProductSlider({super.key, required this.productDataList});
 
   @override
-  _WeldingSliderState createState() => _WeldingSliderState();
+  _ProductSliderState createState() => _ProductSliderState();
 }
 
-class _WeldingSliderState extends State<WeldingSlider> {
+class _ProductSliderState extends State<ProductSlider> {
   final CarouselController _controller = CarouselController();
 
-  final List _isHovering = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
-  final List _isSelected = [
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
+  final List _isHovering = [];
+  final List _isSelected = [];
 
   int _current = 0;
 
-  final List<String> images = [
-    'assets/metal-gate.jpg',
-    'assets/grill.jpg',
-    'assets/raling.jpg',
-    'assets/wire-fencing.jpg',
-    'assets/StainlessSteelGates.jpg',
-    'assets/TreeGuard.jpg',
-    'assets/UnipoleStructure.jpg',
-  ];
-
-  final List<String> places = [
-    'Metal Gates',
-    'Railing & Grills',
-    'Staircase',
-    'Wire Fencing',
-    'Stainless Steel Gates',
-    'Tree Guard',
-    'Unipole Structure',
-  ];
-
   List<Widget> generateImageTiles(screenSize) {
-    return images
+    return widget.productDataList
         .map(
           (element) => ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: Image.asset(
-              element,
+              element.imageUrl,
               fit: BoxFit.cover,
             ),
           ),
         )
         .toList();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (var i = 0; i < widget.productDataList.length; i++) {
+      _isSelected.add(false);
+      _isHovering.add(false);
+    }
   }
 
   @override
@@ -110,7 +77,7 @@ class _WeldingSliderState extends State<WeldingSlider> {
           aspectRatio: 18 / 8,
           child: Center(
             child: Text(
-              places[_current],
+              widget.productDataList[_current].name,
               style: TextStyle(
                 letterSpacing: 8,
                 fontFamily: 'Electrolize',
@@ -143,7 +110,9 @@ class _WeldingSliderState extends State<WeldingSlider> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              for (int i = 0; i < places.length; i++)
+                              for (int i = 0;
+                                  i < widget.productDataList.length;
+                                  i++)
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
@@ -165,7 +134,7 @@ class _WeldingSliderState extends State<WeldingSlider> {
                                             top: screenSize.height / 80,
                                             bottom: screenSize.height / 90),
                                         child: Text(
-                                          places[i],
+                                          widget.productDataList[i].name,
                                           style: TextStyle(
                                             color: _isHovering[i]
                                                 ? Colors.blueGrey[900]
